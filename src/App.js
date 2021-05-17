@@ -72,9 +72,9 @@ function App() {
   return (
     <div className={"App"}>
       <header>
-        <h1>⚛️🔥💬</h1>
+        <h1>Chat Room</h1>
         <SignOut auth={auth} singout={singout} />
-        <button onClick={backToRooms}>Back To Rooms</button>
+        {user?<button onClick={backToRooms}>Back To Rooms</button>:""}
       </header>
       <section>
         {user? <Rooms room={room} roomButtons={roomButtons} firestore={firestore} auth={auth}firebase={firebase} ></Rooms>   : <SignIn firebase={firebase} auth={auth} /> }
