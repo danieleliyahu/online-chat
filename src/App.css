@@ -330,3 +330,12 @@ img {
 .updatePhoto button{
 width: 100%;
 }
+.homeButtons{
+  display: flex;
+  flex-direction: column;
+}
+.homeButtons button{
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: 0.1rem black solid;
+}

@@ -40,7 +40,7 @@ const SignIn = ({firebase,auth}) => {
 
 
     const singUp = () =>{
-        
+        popupvaild.current.className="popup active"
           setstate(<div className="popup active " ref={popupvaild} id="popup-1">
           <div className="overlay "></div>
           <div ref={popupvaild} className="contentPopup active" >
@@ -53,7 +53,32 @@ const SignIn = ({firebase,auth}) => {
           </div>
       </div>)
     }
-
+    const singInWithEmail = () =>{
+    firebase.auth().signInWithEmailAndPassword(email.current.value, password.current.value)
+  .then((userCredential) => {
+    // Signed in
+    var user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+  });
+}
+    const singIn = () =>{
+        popupvaild.current.className="popup active"
+        setstate(<div className="popup active " ref={popupvaild} id="popup-1">
+        <div className="overlay "></div>
+        <div ref={popupvaild} className="contentPopup active" >
+        <div class="close-btn" onClick={togglePopup} >&times;</div>
+        <h1>sign in</h1>
+        <input type={"email"} ref={email}  placeholder={"email"} />
+        <input type={"password"} ref={password} placeholder={"password"} />
+        <button onClick={singInWithEmail}>Sign up with email</button>
+        <div className="closeVaildButton"><i className="fas fa-check-circle"></i></div>
+        </div>
+    </div>)
+  }
 
     const signInWithGoogle = () =>{
         const provider = new firebase.auth.GoogleAuthProvider();
@@ -85,9 +110,7 @@ const SignIn = ({firebase,auth}) => {
 
     //     )
     // }
-    const [Home, setHome] = useState(        <><button onClick={signInWithGoogle}>Sign in with Google</button>
-        <button onClick={signInWithFacebook}>Sign in with Facebook</button>
-        <button onClick={singUp}>Sign up with email</button></>)
+
 
 {/* <form>
 <input type={"email"} value={email} onChange={((e)=>{setemail(e.target.value)})} placeholder={"email"} />
@@ -96,11 +119,14 @@ const SignIn = ({firebase,auth}) => {
 </form> */}
     return (
         <>
+        <div className={"homeButtons"}>
         {state}
         <button onClick={signInWithGoogle}>Sign in with Google</button>
         <button onClick={signInWithFacebook}>Sign in with Facebook</button>
+        <button onClick={singIn}>Sign in with email</button>
         <button onClick={singUp}>Sign up with email</button>
  
+        </div>
         </>
     )
 }
